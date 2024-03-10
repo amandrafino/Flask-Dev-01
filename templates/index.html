@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Home Page {% endblock %}
+
+
+{% block content %}
+<h3>Welcome to Our Home Page</h3>
+<br/>
+<img src="{{ url_for('static', filename='images/office.jpg') }}">
+<p class="mb1">We hope that you enjoy your visit {{ first_name }}. Please send us an email if you have any
+concerns or questions.</p>
+
+{% endblock %}
