@@ -2,6 +2,7 @@
 from dotenv import load_dotenv
 load_dotenv()
 from flask import Flask, flash, redirect, render_template, request, url_for, flash
+from lists import names
 
 
 # Create an instance of this class
@@ -15,7 +16,8 @@ app.config['SECRET_KEY'] = "He is the Rock"
 @app.route('/home')
 def home():
     first_name = 'Albert'
-    return render_template('index.html', first_name=first_name)
+    spouse= 'Gail'
+    return render_template('index.html', name=first_name, content=spouse)
 
 
 # User
@@ -42,7 +44,7 @@ def about():
 # Sandbox
 @app.route('/sandbox')
 def sandbox():
-    return render_template('sandbox.html')
+    return render_template('sandbox.html', send_names=names)
 
 
 if __name__ == '__main__':

@@ -6,4 +6,10 @@
 {% block content %}
 <h3>Welcome to The Sandbox </h3>
 
+<h3>Here is your list of Names</h3>
+<ul>
+    {% for name in send_names %}
+    <li> {{ name }} </li>
+    {% endfor %}
+</ul>
 {% endblock %}
