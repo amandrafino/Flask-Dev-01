@@ -44,9 +44,9 @@ def sandbox():
 def login():
     if request.method == "POST":
         session.permanent = True
-         user = request.form["nm"]  
-         session["user"] = user
-         return redirect(url_for("user"))
+        user = request.form["nm"]  
+        session["user"] = user
+        return redirect(url_for("user"))
     else:
         if 'user' in session:
             return redirect(url_for('user'))
