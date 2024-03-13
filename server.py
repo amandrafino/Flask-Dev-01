@@ -4,6 +4,7 @@ load_dotenv()
 from flask import Flask, flash, redirect, render_template,\
     request, url_for, flash, session
 from lists import names
+from datetime import timedelta
 
 
 # Create an instance of this class
@@ -11,6 +12,9 @@ app = Flask(__name__)
 
 # Secret Key
 app.config['SECRET_KEY'] = "He is the Rock"
+
+# Time to Live
+app.permanent_session_lifetime = timedelta(days=5)
 
 # Home
 @app.route('/')
@@ -39,6 +43,7 @@ def sandbox():
 @app.route('/login', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
+        session.permanent = True
          user = request.form["nm"]  
          session["user"] = user
          return redirect(url_for("user"))
