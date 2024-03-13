@@ -1,7 +1,8 @@
 # Import the Flask Class
 from dotenv import load_dotenv
 load_dotenv()
-from flask import Flask, flash, redirect, render_template, request, url_for, flash
+from flask import Flask, flash, redirect, render_template,\
+    request, url_for, flash, session
 from lists import names
 
 
@@ -34,23 +35,32 @@ def sandbox():
     return render_template('sandbox.html', send_names=names)
 
 
-# GET & POST
+# Login Page / GET & POST / Session
 @app.route('/login', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
          user = request.form["nm"]  
-         return redirect(url_for("user", usr=user))
+         session["user"] = user
+         return redirect(url_for("user"))
     else:
-         return render_template('login.html') 
+        if 'user' in session:
+            return redirect(url_for('user'))
+        return render_template('login.html') 
 
 
-@app.route('/<usr>')
-def user(usr):
-    return f"<h3>{ usr }</h3>"
+# User Page
+@app.route('/user')
+def user():
+    if 'user' in session:
+        user = session['user']
+        return f"<h3>{ user }</h3>"
+    else:
+        return redirect(url_for('login'))
 
-
-
-
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run()
