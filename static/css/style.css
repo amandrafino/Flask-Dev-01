@@ -24,3 +24,7 @@
   .mb1 {
       margin-top: 0.5rem;
   }
+
+  .flashed {
+      color: green;
+  }

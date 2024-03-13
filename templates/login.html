@@ -3,7 +3,18 @@
 {% block title %} Login Page {% endblock %}
 
 
+{:% block content %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<p class="flashed">
+{% for msg in messages %}
+{{ msg }}
+{% endfor %}
+</p>
+{% endif %}
+{% endwith %}
+
 <form action="#" method="POST">
     </br><h3>Welcome to the Login Page</h3>
     <p>Name:</p>
