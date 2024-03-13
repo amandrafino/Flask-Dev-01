@@ -11,7 +11,7 @@ app = Flask(__name__)
 # Secret Key
 app.config['SECRET_KEY'] = "He is the Rock"
 
-
+# Home
 @app.route('/')
 @app.route('/home')
 def home():
@@ -20,20 +20,7 @@ def home():
     return render_template('index.html', name=first_name, content=spouse)
 
 
-# User
-@app.route('/<name>')
-def user(name):
-    return f'''
-    <h3>Welcom back {name}!</h3>
-    <p>Back Home: <a href="{url_for('home')}">Home</a></p>
-    '''
-
-# Redirect to user 
-@app.route('/admin')
-def admin():
-    return redirect(url_for('user', name="Admin!"))
-
-
+# About
 @app.route('/about')
 def about():
     flash('Hello Albert. This is the about page!')
@@ -45,6 +32,24 @@ def about():
 @app.route('/sandbox')
 def sandbox():
     return render_template('sandbox.html', send_names=names)
+
+
+# GET & POST
+@app.route('/login', methods=["POST", "GET"])
+def login():
+    if request.method == "POST":
+         user = request.form["nm"]  
+         return redirect(url_for("user", usr=user))
+    else:
+         return render_template('login.html') 
+
+
+@app.route('/<usr>')
+def user(usr):
+    return f"<h3>{ usr }</h3>"
+
+
+
 
 
 if __name__ == '__main__':
