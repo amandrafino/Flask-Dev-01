@@ -48,8 +48,6 @@ def login():
         session["user"] = user
         return redirect(url_for("user"))
     else:
-        if 'user' in session:
-            return redirect(url_for('user'))
         return render_template('login.html') 
 
 
@@ -58,7 +56,7 @@ def login():
 def user():
     if 'user' in session:
         user = session['user']
-        return f"<h3>{ user }</h3>"
+        return render_template('user.html', user=user)
     else:
         return redirect(url_for('login'))
 
