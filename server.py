@@ -5,7 +5,7 @@ from flask import Flask, flash, redirect, render_template,\
     request, url_for, flash, session
 from lists import names
 from datetime import timedelta
-import sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
 
 # Create an instance of this class
