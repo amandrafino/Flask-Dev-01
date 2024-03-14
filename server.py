@@ -5,6 +5,7 @@ from flask import Flask, flash, redirect, render_template,\
     request, url_for, flash, session
 from lists import names
 from datetime import timedelta
+import sqlalchemy
 
 
 # Create an instance of this class
@@ -56,11 +57,21 @@ def login():
 
 
 # User Page
-@app.route('/user')
+@app.route('/user', methods=["POST", "GET"])
 def user():
+    email = None
     if 'user' in session:
         user = session['user']
-        return render_template('user.html', user=user)
+
+        if request.method == "POST":
+            email = request.form["email"]
+            session["email"] = email
+            flash("Email was saved!")
+        else:
+            if "email" in session:
+                email = session["email"]
+
+        return render_template('user.html', email=email)
     else:
         flash('You are not logged in!')
         return redirect(url_for('login'))
@@ -70,6 +81,7 @@ def logout():
     if 'user' in session:
         flash(f'You have been successfully logged out.', 'info')
     session.pop('user', None)
+    session.pop("email", None)
     return redirect(url_for('login'))
 
 if __name__ == '__main__':

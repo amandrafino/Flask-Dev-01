@@ -14,6 +14,10 @@
 {% endwith %}
 
 <h3>Welcome to your user page: {{ user }}</h3>
+<form action="#" method="POST">
+    <input type="email" name="email" placeholder="Enter Email" value="{{email if email }}"/>
+    <input type="submit" value="Submit"/>
+</form>
 
 
 {% endblock %}
