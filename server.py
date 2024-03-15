@@ -14,8 +14,20 @@ app = Flask(__name__)
 # Secret Key
 app.config['SECRET_KEY'] = "He is the Rock"
 
+
+# Setup a db obj which equal new sql db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Build your model:
+
+
+
+
 # Time to Live
 app.permanent_session_lifetime = timedelta(days=5)
+
 
 # Home
 @app.route('/')
