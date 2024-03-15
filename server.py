@@ -23,8 +23,6 @@ db = SQLAlchemy(app)
 # Build your model:
 
 
-
-
 # Time to Live
 app.permanent_session_lifetime = timedelta(days=5)
 
